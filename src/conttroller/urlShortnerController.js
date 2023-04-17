@@ -31,15 +31,17 @@ exports.createUrl = async (req, res) => {
       });
     }
     // CHECKING IF THE URL EXISTS IN REALITY
-    let checkUrlExistence = await axios
-      .get(longUrl)
-      .then(() => longUrl)
-      .catch(() => null);
-    if (!checkUrlExistence) {
-      return res.status(404).json({
-        message: "This longUrl does not exist",
-      });
-    }
+    
+    // let checkUrlExistence = await axios
+    //   .get(longUrl)
+    //   .then(() => longUrl)
+    //   .catch(() => null);
+    // if (!checkUrlExistence) {
+    //   return res.status(404).json({
+    //     message: "This longUrl does not exist",
+    //   });
+    // }
+
     // CHECKING IF THE URL FOR THE LONG URL PROVIDED IS PRESENT IN CACHE
     const cacheCheck = await redisClient.get(longUrl);
     if (cacheCheck) {
@@ -91,8 +93,7 @@ exports.getUrl = async function (req, res) {
 
     // CHECKING IF SHORT URL CODE IS PRESENT IN DB
     let foundurl = await urlModel.findOne({ shortUrlCode: shortUrlCode });
-    if (!foundurl)
-      return res.status(404).json({ message: "Short Url doesn't exist in DB" });
+    if (!foundurl) return res.status(404).json({ message: "Short Url doesn't exist in DB" });
 
     // SET DATA TO REDIS (CACHE) SERVER
     await redisClient.set(shortUrlCode, foundurl.longUrl);
