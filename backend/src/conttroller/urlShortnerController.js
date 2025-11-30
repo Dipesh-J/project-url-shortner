@@ -97,7 +97,7 @@ exports.getUrl = async function (req, res) {
 
     // SET DATA TO REDIS (CACHE) SERVER
     await redisClient.set(shortUrlCode, foundurl.longUrl);
-    await redisClient.expire(shortUrl, 60); // SET TO EXPIRE IN 60 SECONDS
+    await redisClient.expire(shortUrlCode, 60); // SET TO EXPIRE IN 60 SECONDS
 
     return res.status(302).redirect(foundurl.longUrl);
   } catch (error) {
