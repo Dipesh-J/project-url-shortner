@@ -5,10 +5,11 @@ const redis = require("redis");
 const isUrl = require("is-valid-http-url");
 
 const redisClient = redis.createClient({
-  password: "FGmkeqY4cCrwW8rDaSHSHYQVZwOWJlHb",
+  username: process.env.REDIS_USERNAME,
+  password: process.env.REDIS_PASSWORD,
   socket: {
-    host: "redis-10549.c302.asia-northeast1-1.gce.cloud.redislabs.com",
-    port: 10549,
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT),
   },
 });
 const newLocal = "Connected to redis db";

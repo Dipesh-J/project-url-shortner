@@ -1,3 +1,5 @@
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const express = require('express');
 const mongoose = require('mongoose');
 const route = require('./src/routes/route')
@@ -11,7 +13,7 @@ app.use(cors({
 }))
 // Connect to MongoDB
 mongoose.set('strictQuery',true)
-mongoose.connect('mongodb+srv://group22:1234@group22databse.uvtoalh.mongodb.net/url-shortner', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
 .then(()=> console.log('Connected to MongoDB'))
 .catch((err)=> console.log(err))
 
