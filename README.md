@@ -80,6 +80,7 @@ A scalable URL shortening service built with a React frontend and Express.js bac
    MONGODB_URI=your_mongodb_connection_string
    REDIS_HOST=your_redis_host
    REDIS_PORT=your_redis_port
+   REDIS_USERNAME=your_redis_username
    REDIS_PASSWORD=your_redis_password
    ```
 
